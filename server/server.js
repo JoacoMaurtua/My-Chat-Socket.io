@@ -34,6 +34,11 @@ const io = new Server(server, { //conectar nuestro servidor socket.io con el de 
 io.on('connection',(socket)=>{
   console.log(`User Connected: ${socket.id}`) //reconocer que usur se conecto
 
+  socket.on('join_room',(data)=>{ //la funcion joinRoom le envia el nombre de la sala desde el frontend
+    socket.join(data);
+    console.log(`User whit ID: ${socket.id} joined room: ${data}`)
+  });
+
   socket.on('disconnect',()=>{
     console.log('User Disconnected',socket.id)
   })

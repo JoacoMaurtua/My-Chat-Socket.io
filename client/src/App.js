@@ -13,9 +13,11 @@ function App() {
   const [userName, setUserName] = useState("");
   const [room, setRoom] =  useState("");
 
-  const joinRoom = ()=>{ //cpnectar al usuario con la sala de socket.io
-
-  };
+  const joinRoom = ()=>{ //conectar al usuario con la sala de socket.io
+    if(userName !== "" && room !== ""){
+      socket.emit('join_room',room)//enviamos la data de room al backend
+    }
+  }; //NOTA: Los eventos que queremos usar en el front end deben ser primero implementados en el backend
 
   return (
     <div className="App">
@@ -31,9 +33,7 @@ function App() {
         placeholder="ID SALA..."
         onChange = {(event) => setRoom(event.target.value)}
       ></input>  {/* Una sala es un espacio comun y cerrado de intercambio de datos */}
-      <button>Únete a la sala</button>
-
-     
+      <button onClick = {joinRoom}>Únete a la sala</button>
     </div>
   );
 }
