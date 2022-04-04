@@ -6,6 +6,7 @@ Socket.IO se compone de dos partes:
 import React, {useState} from 'react';
 import './App.css';
 import io from 'socket.io-client';
+import Chat from './components/Chat';
 
 const socket = io.connect("http://localhost:8000",{ transports : ['websocket'] }); //segundo parametro es un metodo de transporte neutral para todos los navegadores
 
@@ -34,6 +35,8 @@ function App() {
         onChange = {(event) => setRoom(event.target.value)}
       ></input>  {/* Una sala es un espacio comun y cerrado de intercambio de datos */}
       <button onClick = {joinRoom}>Únete a la sala</button>
+
+      <Chat socket={socket} userName={userName} room={room}/>
     </div>
   );
 }
