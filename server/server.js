@@ -32,12 +32,12 @@ const io = new Server(server, { //conectar nuestro servidor socket.io con el de 
 
 //sockets se basa en eventos
 io.on('connection',(socket)=>{
-  console.log(socket.id) //reconocer que usur se conecto
+  console.log(`User Connected: ${socket.id}`) //reconocer que usur se conecto
 
   socket.on('disconnect',()=>{
     console.log('User Disconnected',socket.id)
   })
-}) //evento que detecta si un usuario se conecto al server de socket.io
+}); //evento que detecta si un usuario se conecto al server de socket.io
 
 server.listen(PORT,()=>{
   console.log(`1:Server running in PORT ${PORT}`)
