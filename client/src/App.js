@@ -25,20 +25,21 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Primer Chat con Socket.io</h1>
-      <h3>Únete al chat!</h3>
-      <input
-        type="text"
-        placeholder="Joaquin..."
-        onChange={(event) => setUserName(event.target.value)}
-      ></input>
-      <input
-        type="text"
-        placeholder="ID SALA..."
-        onChange={(event) => setRoom(event.target.value)}
-      ></input>{' '}
-      {/* Una sala es un espacio comun y cerrado de intercambio de datos */}
-      <button onClick={joinRoom}>Únete a la sala</button>
+      <div className="joinChatContainer">
+        <h3 style={{marginLeft:"-1rem"}}>Únete al chat!</h3>
+        <input
+          type="text"
+          placeholder="Joaquin..."
+          onChange={(event) => setUserName(event.target.value)}
+        ></input>
+        <input
+          type="text"
+          placeholder="ID SALA..."
+          onChange={(event) => setRoom(event.target.value)}
+        ></input>{' '}
+        {/* Una sala es un espacio comun y cerrado de intercambio de datos */}
+        <button onClick={joinRoom}>Únete a la sala</button>
+      </div>
       <Chat socket={socket} userName={userName} room={room} />
     </div>
   );

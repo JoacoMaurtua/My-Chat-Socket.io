@@ -28,7 +28,7 @@ const Chat = ({ socket, userName, room }) => {
   useEffect(() =>{//evento para recivir mensajes(parecido a los del backend)
     socket.on("receive_message",(data)=>{
       console.log(data);
-    });
+    }); 
 
   },[socket])
 
