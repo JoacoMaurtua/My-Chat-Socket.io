@@ -2,7 +2,7 @@
   En este componente es donde enviaremos y reciviremos mensajes
   a traves de socket.io
 */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Chat = ({ socket, userName, room }) => {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -23,6 +23,14 @@ const Chat = ({ socket, userName, room }) => {
       await socket.emit("send_message", messageData);
     }
   };
+
+  //Detectara cada vez que haya un cambio en nuestro socket(comunicacion bidireccional)
+  useEffect(() =>{//evento para recivir mensajes(parecido a los del backend)
+    socket.on("receive_message",(data)=>{
+      console.log(data);
+    });
+
+  },[socket])
 
   return (
     <div>

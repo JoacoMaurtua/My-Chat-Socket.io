@@ -40,6 +40,7 @@ io.on('connection',(socket)=>{
   });
 
   socket.on('send_message',(data)=>{
+    socket.to(data.room).emit("receive_message",data) //emitira el mensaje enviado desde el front a todos los que este en ese room
     console.log(data)
   });
 
