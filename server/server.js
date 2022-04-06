@@ -39,10 +39,16 @@ io.on('connection',(socket)=>{
     console.log(`User whit ID: ${socket.id} joined room: ${data}`)
   });
 
+  socket.on('send_message',(data)=>{
+    console.log(data)
+  });
+
   socket.on('disconnect',()=>{
     console.log('User Disconnected',socket.id)
-  })
+  });
+
 }); //evento que detecta si un usuario se conecto al server de socket.io
+
 
 
 server.listen(PORT,()=>{

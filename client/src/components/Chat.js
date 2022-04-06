@@ -19,6 +19,8 @@ const Chat = ({ socket, userName, room }) => {
           ':' +
           new Date(Date.now()).getMinutes(),
       };
+      //emitir un socket message a traves de socket.io
+      await socket.emit("send_message", messageData);
     }
   };
 
@@ -32,9 +34,9 @@ const Chat = ({ socket, userName, room }) => {
         <input
           type="text"
           placeholder="Hey..."
-          onChange={(event) => sendMessage(event.target.value)}
+          onChange={(event) => setCurrentMessage(event.target.value)}
         />
-        <button>&#9658;</button> {/* error automatico */}
+        <button onClick={sendMessage}>&#9658;</button> {/* error automatico */}
       </div>
     </div>
   );
