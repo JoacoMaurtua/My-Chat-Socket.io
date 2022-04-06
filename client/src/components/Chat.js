@@ -33,7 +33,7 @@ const Chat = ({ socket, userName, room }) => {
   },[socket])
 
   return (
-    <div>
+    <div className="chat-window">
       <div className="chat-header">
         <p>Live Chat</p>
       </div>
