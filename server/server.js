@@ -26,13 +26,13 @@ const server = http.createServer(app); //Express inicializa app para ser un cont
 const io = new Server(server, { //conectar nuestro servidor socket.io con el de express
   cors: {
     origin: "http//localhost:3000", //esta bien aceptar la comunicaicon de sockets con esta URL
-    methods: ["GET","POST"], // los metodos que acep
+    methods: ["GET","POST"], // los metodos que aceptara
   } //especificar las credenciales y configuraciones de cors en nuestro server
 });
 
 //sockets se basa en eventos
 io.on('connection',(socket)=>{
-  console.log(`User Connected: ${socket.id}`) //reconocer que usur se conecto
+  console.log(`User Connected: ${socket.id}`) //reconocer que user se conecto
 
   socket.on('join_room',(data)=>{ //la funcion joinRoom le envia el nombre de la sala desde el frontend
     socket.join(data);
@@ -43,6 +43,7 @@ io.on('connection',(socket)=>{
     console.log('User Disconnected',socket.id)
   })
 }); //evento que detecta si un usuario se conecto al server de socket.io
+
 
 server.listen(PORT,()=>{
   console.log(`1:Server running in PORT ${PORT}`)
