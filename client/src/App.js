@@ -15,32 +15,37 @@ const socket = io.connect('http://localhost:8000', {
 function App() {
   const [userName, setUserName] = useState('');
   const [room, setRoom] = useState('');
+  const [showChat, setShowChat] = useState(false);
 
   const joinRoom = () => {
     //conectar al usuario con la sala de socket.io
     if (userName !== '' && room !== '') {
       socket.emit('join_room', room); //enviamos la data de room al backend
+      setShowChat(true);
     }
   }; //NOTA: Los eventos que queremos usar en el front end deben ser primero implementados en el backend
 
   return (
     <div className="App">
-      <div className="joinChatContainer">
-        <h3 style={{marginLeft:"-1rem"}}>Únete al chat!</h3>
-        <input
-          type="text"
-          placeholder="Joaquin..."
-          onChange={(event) => setUserName(event.target.value)}
-        ></input>
-        <input
-          type="text"
-          placeholder="ID SALA..."
-          onChange={(event) => setRoom(event.target.value)}
-        ></input>{' '}
-        {/* Una sala es un espacio comun y cerrado de intercambio de datos */}
-        <button onClick={joinRoom}>Únete a la sala</button>
-      </div>
-      <Chat socket={socket} userName={userName} room={room} />
+      {!showChat ? (
+        <div className="joinChatContainer">
+          <h3 style={{ marginLeft: '-1rem' }}>Únete al chat!</h3>
+          <input
+            type="text"
+            placeholder="Joaquin..."
+            onChange={(event) => setUserName(event.target.value)}
+          ></input>
+          <input
+            type="text"
+            placeholder="ID SALA..."
+            onChange={(event) => setRoom(event.target.value)}
+          ></input>{' '}
+          {/* Una sala es un espacio comun y cerrado de intercambio de datos */}
+          <button onClick={joinRoom}>Únete a la sala</button>
+        </div>
+      ) : (
+        <Chat socket={socket} userName={userName} room={room} />
+      )}
     </div>
   );
 }

@@ -6,6 +6,10 @@ import React, { useState, useEffect } from 'react';
 
 const Chat = ({ socket, userName, room }) => {
   const [currentMessage, setCurrentMessage] = useState('');
+  const [messageList, setMessageList] = useState([]);
+
+  //para enviar mensaje ---> funcion asincronar
+  //para resivir mensaje ---> useEffect()
 
   const sendMessage = async () => {
     //Esta funcion permitira enviar mensajes a traves de nuestro servidor socket.io
@@ -27,7 +31,8 @@ const Chat = ({ socket, userName, room }) => {
   //Detectara cada vez que haya un cambio en nuestro socket(comunicacion bidireccional)
   useEffect(() =>{//evento para recivir mensajes(parecido a los del backend)
     socket.on("receive_message",(data)=>{
-      console.log(data);
+      setMessageList((list) => [...list,data]) //devuelve los mensajes anteriores y tambien el nuevo mensaje
+      //console.log(data);
     }); 
 
   },[socket])
@@ -37,7 +42,11 @@ const Chat = ({ socket, userName, room }) => {
       <div className="chat-header">
         <p>Live Chat</p>
       </div>
-      <div className="chat-body"></div>
+      <div className="chat-body">
+        {messageList.map((messageContent)=>{
+          return <h3>{messageContent.message}</h3>
+        })}
+      </div>
       <div className="chat-footer">
         <input
           type="text"
