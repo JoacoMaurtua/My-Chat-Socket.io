@@ -32,7 +32,7 @@ function App() {
           <h3 style={{ marginLeft: '-1rem' }}>Únete al chat!</h3>
           <input
             type="text"
-            placeholder="Joaquin..."
+            placeholder="Usuario..."
             onChange={(event) => setUserName(event.target.value)}
           ></input>
           <input
