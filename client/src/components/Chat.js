@@ -25,6 +25,8 @@ const Chat = ({ socket, userName, room }) => {
       };
       //emitir un socket message a traves de socket.io
       await socket.emit("send_message", messageData);
+      setMessageList((list) => [...list,messageData]) //devuelve los mensajes anteriores y tambien el nuevo mensaje
+
     }
   };
 
@@ -43,8 +45,18 @@ const Chat = ({ socket, userName, room }) => {
         <p>Live Chat</p>
       </div>
       <div className="chat-body">
-        {messageList.map((messageContent)=>{
-          return <h3>{messageContent.message}</h3>
+        {messageList.map((messageContent)=>{ //recorre un arreglo de objetos
+          return <div className="message">
+            <div>
+              <div className="message-content">
+                  <p>{messageContent.message}</p>
+              </div>
+              <div className="message-meta">
+                  <p>{messageContent.time}</p>
+                  <p>{messageContent.author}</p>
+              </div>
+            </div>
+          </div>
         })}
       </div>
       <div className="chat-footer">
